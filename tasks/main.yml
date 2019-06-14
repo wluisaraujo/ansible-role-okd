@@ -1,0 +1,12 @@
+---
+# tasks file for role iac-ansible-okd
+- assert:
+    msg: "This role can only be applied to RedHat or CentOS Environment"
+    that: ansible_os_family == "RedHat" and ansible_distribution_major_version == "7"
+
+- include_tasks: prerequisites-{{ ansible_os_family }}.yml
+
+- include_tasks: deploy-docker-{{ ansible_os_family }}.yml
+
+#- include_tasks: deploy-cluster-{{ ansible_distribution }}.yml
+...

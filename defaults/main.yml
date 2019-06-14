@@ -1,0 +1,3 @@
+---
+# defaults file for role iac-ansible-okd
+service_name:
