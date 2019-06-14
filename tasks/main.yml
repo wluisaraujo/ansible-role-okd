@@ -6,7 +6,7 @@
 
 - include_tasks: prerequisites-{{ ansible_os_family }}.yml
 
-- include_tasks: deploy-docker-{{ ansible_os_family }}.yml
+#- include_tasks: deploy-docker-{{ ansible_os_family }}.yml
 
 #- include_tasks: deploy-cluster-{{ ansible_distribution }}.yml
 ...

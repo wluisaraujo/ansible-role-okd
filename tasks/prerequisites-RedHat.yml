@@ -6,7 +6,7 @@
 - replace:
     path: /etc/selinux/config
     regexp: '^SELINUX=enforcing'
-    replace: 'SELINUX=disabled'
+    replace: 'SELINUX=permissive'
 
 - systemd:
     state: stopped
