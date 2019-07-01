@@ -1,5 +1,5 @@
 ---
-# handlers for role iac-ansible-okd
+# handlers for role ansible-role-okd
 
 ## SystemD
 - name: "Start kubelet"
