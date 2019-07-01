@@ -31,7 +31,7 @@ Example Playbook
   vars_files:
     - vars/main.yml 
   roles:
-    - ansible-role-okd
+    - okd
 ...
 ```
 

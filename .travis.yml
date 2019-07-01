@@ -55,7 +55,7 @@ install:
 
 
  # Install ansible role
- - ansible-galaxy install wluisaraujo.iac_ansible_okd
+ - ansible-galaxy install wluisaraujo.okd
 
 script:
  # Basic role syntax check
