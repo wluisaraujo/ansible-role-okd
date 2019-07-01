@@ -1,5 +1,5 @@
 galaxy_info:
-  role_name: iac-ansible-okd
+  role_name: okd
   author: w.luis.araujo
   description: "Infrastructure as Code - IaC: with Ansible for OpenShift Cluster Environment (OKD) "
   company: LUSAR | wluisaraujo.github.io
