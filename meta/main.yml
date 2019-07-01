@@ -1,10 +1,10 @@
 galaxy_info:
   role_name: okd
   author: w.luis.araujo
-  description: "Infrastructure as Code - IaC: with Ansible for OpenShift Cluster Environment (OKD) "
+  description: "Infrastructure as Code (IaC) with Ansible role for OpenShift Cluster Environment (OKD)"
   company: LUSAR | wluisaraujo.github.io
-  license: "(GPLv3)"
-  min_ansible_version: 2.0
+  license: "license (GPLv3)"
+  min_ansible_version: 2.4
   platforms:
   - name: EL
     versions:
@@ -17,4 +17,5 @@ galaxy_info:
     - kubernetes
     - openshift
     - okd
-dependencies: []
+dependencies: 
+  - role: wluisaraujo.docker
