@@ -1,4 +1,4 @@
-[![Ansible Galaxy](https://img.shields.io/badge/Ansible%20Galaxy-OKD-blue.svg)](https://galaxy.ansible.com/wluisaraujo/iac_ansible_okd)  [![Build Status](https://travis-ci.org/wluisaraujo/ansible-role-okd.svg?branch=master)](https://travis-ci.org/wluisaraujo/ansible-role-okd)
+[![Ansible Galaxy](https://img.shields.io/badge/Ansible%20Galaxy-OKD-blue.svg)](https://galaxy.ansible.com/wluisaraujo/okd) [![Build Status](https://travis-ci.org/wluisaraujo/ansible-role-okd.svg?branch=master)](https://travis-ci.org/wluisaraujo/ansible-role-okd)
 
 # Infrastructure as Code: with [Ansible](https://www.ansible.com) role to for OpenShift Cluster Environment [OKD](https://www.okd.io/)
 ------------
