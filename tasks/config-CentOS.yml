@@ -30,7 +30,6 @@
   ignore_errors: yes
   when: ansible_service_mgr == "systemd"
   
-  
 - shell: tuned-adm profile atomic-host
   notify:
     - Start tuned
