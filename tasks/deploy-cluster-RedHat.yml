@@ -15,21 +15,20 @@
     chdir: /etc/ansible/roles/openshift-ansible
   when: CLONE is success  
 
+# TO MASTER /OSE
+#docker pull registry.redhat.io/openshift3/ose-node:v3.11
+#docker pull registry.redhat.io/openshift3/ose-node:v3.11.117
+#docker pull registry.redhat.io/openshift3/ose-control-plane:v3.11
+#docker pull registry.redhat.io/openshift3/ose-control-plane:v3.11.117
+#docker pull registry.redhat.io/openshift3/ose-pod:v3.11
+#docker pull registry.redhat.io/openshift3/ose-pod:v3.11.117
+#docker pull registry.redhat.io/rhel7/etcd
+#docker pull docker.io/cockpit/kubernetes:latest
+#docker pull quay.io/coreos/etcd
 
-# TO MASTER
-#docker pull docker.io/cockpit/kubernetes
-#docker pull docker.io/openshift/origin-deployer:v3.11
-#docker pull docker.io/openshift/origin-docker-registry:v3.11
-#docker pull docker.io/openshift/origin-haproxy-router:v3.11
-#docker pull docker.io/openshift/origin-pod:v3.11
-#docker pull docker.io/openshift/origin-control-plane:v3.11
-#docker pull quay.io/coreos/etcd:v3.2.22
-
-# TO NODE
-#docker pull docker.io/cockpit/kubernetes
-#docker pull docker.io/openshift/origin-deployer:v3.11
-#docker pull docker.io/openshift/origin-docker-registry:v3.11
-#docker pull docker.io/openshift/origin-haproxy-router:v3.11
-#docker pull docker.io/openshift/origin-pod:v3.11   
+# TO NODE /OSE
+#docker pull registry.redhat.io/openshift3/ose-node:v3.11
+#docker pull registry.redhat.io/openshift3/ose-node:v3.11.117
+#docker pull registry.redhat.io/openshift3/ose-pod:v3.11
+#docker pull registry.redhat.io/openshift3/ose-pod:v3.11.117
 ...
-

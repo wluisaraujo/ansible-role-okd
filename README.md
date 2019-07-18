@@ -47,7 +47,9 @@ Example Playbook
 Examplo Cenário
 ----------------
 
+
 1 host master
+
 2 hosts app-node
 
 
