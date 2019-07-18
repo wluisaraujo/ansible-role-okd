@@ -1,3 +1,18 @@
 ---
 # defaults file for role ansible-role-okd
-service_name:
+dns_prefix: okd
+okd_domain: exemplo.com
+
+CERT_PATH: /etc/pki/tls/cets
+
+lb_name: lb.exemplo.com
+lb_addr: 192.168.200.100
+
+master_name: master.exemplo.com
+master_addr: 192.168.200.101
+
+node01_name: node01.exemplo.com
+node01_addr: 192.168.200.102
+
+node01_name: node02.exemplo.com
+node01_addr: 192.168.200.103

@@ -17,6 +17,7 @@
   loop:
     - "@Development Tools"
     - NetworkManager 
+    - atomic-openshift-utils
     - bash-completion
     - bash-completion-extras
     - bind-utils
@@ -49,7 +50,7 @@
     - vim
     - wget
     - yum-utils
-    - zile 
+    - zile
  
 ## UPDATE ALL
 - package:

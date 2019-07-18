@@ -1,0 +1,102 @@
+[OSEv3:children]
+lb
+masters
+nodes
+etcd
+#glusterfs
+
+[lb]
+{{ lb_name }}           ansible_host={{ lb_addr }}  openshift_ip='{{ lb_addr }}'    openshift_public_ip='{{ lb_addr }}'
+
+[etcd]
+{{ master_name }}       ansible_host={{ master_addr }}  openshift_ip='{{ master_addr }}' openshift_public_ip='{{ master_addr }}' openshift_public_hostname={{ lb_name }}
+
+[masters]
+{{ master_name }}       ansible_host={{ master_addr }}  openshift_ip='{{ master_addr }}' openshift_public_ip='{{ master_addr }}' openshift_public_hostname={{ lb_name }}
+
+[nodes]
+{{ master_name }}    	ansible_host={{ master_addr }}  openshift_ip='{{ master_addr }}' openshift_public_ip='{{ master_addr }}' openshift_public_hostname={{ master_name }} openshift_node_group_name='node-config-master'
+{{ node01_name }}   	ansible_host={{ node01_addr }}  openshift_ip='{{ node01_addr }}' openshift_public_ip='{{ node01_addr }}' openshift_public_hostname={{ node01_name }} openshift_node_group_name='node-config-compute'
+{{ node02_name }}    	ansible_host={{ node02_addr }}  openshift_ip='{{ node02_addr }}' openshift_public_ip='{{ node02_addr }}' openshift_public_hostname={{ node02_name }} openshift_node_group_name='node-config-compute'
+
+# with GFS
+#[glusterfs]
+#{{ master_name }}		    ansible_host={{ master_addr }} glusterfs_zone=1 glusterfs_devices='["/dev/vdb"]'
+#{ node01_name }}		    ansible_host={{ node01_addr }} glusterfs_zone=2 glusterfs_devices='["/dev/vdb"]'
+#{{ node02_name }		    ansible_host={{ node02_addr }} glusterfs_zone=3 glusterfs_devices='["/dev/vdb"]'
+
+[OSEv3:vars]
+ansible_ssh_user=root
+ansible_become=false
+debug_level=2
+openshift_release=v3.11
+openshift_deployment_type=origin
+openshift_enable_olm=true
+ansible_service_broker_install=false
+template_service_broker_install=false
+
+# define domain names
+
+app_dns_prefix={{ dns_prefix }}
+public_hosted_zone={{ okd_domain }}
+load_balancer_hostname="{{ dns_prefix }}.{{ okd_domain }}"
+openshift_master_default_subdomain="{{ dns_prefix }}.{{ okd_domain }}"
+openshift_master_cluster_hostname="{{ dns_prefix }}.{{ okd_domain }}"
+openshift_master_cluster_public_hostname="{{ dns_prefix }}.{{ okd_domain }}"
+
+# Define Ports
+openshift_master_api_port=443
+openshift_master_console_port=443
+
+# disable check
+openshift_disable_check="memory_availability,disk_availability,docker_image_availability"
+
+# registry
+openshift_hosted_registry_storage_kind=glusterfs
+openshift_hosted_registry_storage_volume_size=10Gi
+openshift_hosted_registry_selector="node-role.kubernetes.io/infra=true"
+
+# logging
+openshift_logging_install_logging=true
+openshift_logging_es_pvc_dynamic=true
+openshift_logging_es_pvc_size=10Gi
+openshift_logging_es_cluster_size=3
+openshift_logging_es_pvc_storage_class_name='glusterfs-storage-block'
+openshift_logging_kibana_nodeselector={"node-role.kubernetes.io/infra":"true"}
+openshift_logging_curator_nodeselector={"node-role.kubernetes.io/infra":"true"}
+openshift_logging_es_nodeselector={"node-role.kubernetes.io/infra":"true"}
+
+# metrics
+openshift_metrics_install_metrics=true
+openshift_metrics_storage_kind=dynamic
+openshift_master_dynamic_provisioning_enabled=true
+openshift_metrics_storage_volume_size=9Gi
+openshift_metrics_cassanda_pvc_storage_class_name='glusterfs-storage-block'
+openshift_metrics_hawkular_nodeselector={"node-role.kubernetes.io/infra":"true"}
+openshift_metrics_cassandra_nodeselector={"node-role.kubernetes.io/infra":"true"}
+openshift_metrics_heapster_nodeselector={"node-role.kubernetes.io/infra":"true"}
+
+# prometheous operator
+openshift_cluster_monitoring_operator_install=true
+openshift_cluster_monitoring_operator_node_selector={"node-role.kubernetes.io/infra":"true"}
+openshift_cluster_monitoring_operator_prometheus_storage_enabled=true
+openshift_cluster_monitoring_operator_alertmanager_storage_enabled=true
+openshift_cluster_monitoring_operator_prometheus_storage_capacity=10Gi
+openshift_cluster_monitoring_operator_alertmanager_storage_capacity=2Gi
+openshift_cluster_monitoring_operator_prometheus_storage_class_name='glusterfs-storage-block'
+openshift_cluster_monitoring_operator_alertmanager_storage_class_name='glusterfs-storage-block'
+
+# OCS storage cluster
+#openshift_storage_glusterfs_namespace=app-storage
+#openshift_storage_glusterfs_storageclass=true
+#openshift_storage_glusterfs_storageclass_default=false
+#openshift_storage_glusterfs_block_deploy=true
+#openshift_storage_glusterfs_block_host_vol_create=true
+#openshift_storage_glusterfs_block_host_vol_size=85
+#penshift_storage_glusterfs_block_storageclass=true
+#openshift_storage_glusterfs_block_storageclass_default=false
+
+# Master
+openshift_master_overwrite_named_certificates=true
+openshift_master_named_certificates=[{"certfile": "{{ cert_path }}/example.com.crt", "keyfile": "{{ cert_path }}/example.com.key", "names": ["okd.example.com"], "cafile": "{{ cert_path }}/example.com-ca.crt"}]
+openshift_hosted_router_certificate={"certfile": "{{ cert_path }}/example.com.crt", "keyfile": "{{ cert_path }}/example.com.key", "cafile": "{{ cert_path }}/example.com-ca.crt"}

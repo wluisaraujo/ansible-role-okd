@@ -84,4 +84,14 @@
     path: /etc/modules-load.d/k8s.conf
     line: 'br_netfilter'
     create: true
+
+- lineinfile:
+    path: /etc/hosts
+    line: "{{ item }}"
+    state: present 
+  loop:
+    - "{{ lb_addr }} {{ lb_name }}"
+    - "{{ master_addr }} {{ master_name }}"
+    - "{{ node01_addr }} {{ node01_name }}"
+    - "{{ node02_addr }} {{ node02_name }}"
 ...
