@@ -1,0 +1,59 @@
+---
+- package:
+    name: "{{ item }}"
+    state: latest
+    update_cache: yes
+  loop:
+    - centos-release-openshift-origin311 
+    - centos-release-scl
+    - epel-release
+  register: RELEASE
+  
+- package:
+    name: "{{ item }}"
+    state: latest
+    update_cache: yes
+  when: "RELEASE is success"
+  loop:
+    - "@Development Tools"
+    - NetworkManager 
+    - bash-completion
+    - bash-completion-extras
+    - bind-utils
+    - bridge-utils
+    - ccze
+    - chrony
+    - cockpit
+    - curl
+    - device-mapper-persistent-data 
+    - git 
+    - htop
+    - httpd-tools 
+    - iptables-services 
+    - java-11-openjdk-headless
+    - kexec-tools 
+    - lsof
+    - lvm2 
+    - net-tools 
+    - openssl-devel 
+    - psacct
+    - pyOpenSSL  
+    - python-cryptography 
+    - python-devel 
+    - python-passlib
+    - python2-pip 
+    - rsync
+    - sos 
+    - tuned
+    - tuned-profiles-atomic
+    - vim
+    - wget
+    - yum-utils
+    - zile 
+ 
+## UPDATE ALL
+- package:
+    name: '*'
+    state: latest
+    update_cache: yes
+...

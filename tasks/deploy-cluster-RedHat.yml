@@ -1,47 +1,10 @@
 ---
-- yum_repository:
-    name: kubernetes
-    description: Kubernetes YUM Repo
-    file: kubernetes
-    baseurl: https://packages.cloud.google.com/yum/repos/kubernetes-el7-x86_64
-    gpgkey: https://packages.cloud.google.com/yum/doc/yum-key.gpg https://packages.cloud.google.com/yum/doc/rpm-package-key.gpg
-    gpgcheck: 1
-    enabled: true
+- file:
+    path: /etc/ansible/roles
+    state: directory
 
-- yum: 
-    name: "{{ item }}" 
-    state: present 
-    update_cache: yes
-  loop:
-    - kubelet
-    - kubeadm
-    - kubectl
-#    - kubernetes-cni
-#  become: true
-#- name: Fix kubelet CGROUP_ARGS
-#  replace:
-#    path: /etc/systemd/system/kubelet.service.d/10-kubeadm.conf
-#    regexp: .*KUBELET_CGROUP_ARGS=.*
-#    replace: Environment="KUBELET_CGROUP_ARGS=--cgroup-driver=cgroupfs --runtime-cgroups=/systemd/system.slice --kubelet-cgroups=/systemd/system.slice"
-#  become: true
-#- name: Disable net.ipv6.conf.all.disable_ipv6
-#  sysctl:
-#    name: net.ipv6.conf.all.disable_ipv6
-#    value: 1
-#  become: true
-#- name: Disable net.ipv6.conf.default.disable_ipv6
-#  sysctl:
-#    name: net.ipv6.conf.default.disable_ipv6
-#    value: 1
-#  become: true
-#- name: Enable net.bridge.bridge-nf-call-iptables
-#  sysctl:
-#    name: net.bridge.bridge-nf-call-iptables
-#    value: 1
-#  become: true
-#- name: Enable kubelet service
-#  systemd:
-#    name: kubelet
-#    enabled: true
-#    masked: false
-#  become: true
+- git:
+    repo: https://github.com/openshift/openshift-ansible.git
+    dest: /etc/ansible/roles
+    clone: yes
+...

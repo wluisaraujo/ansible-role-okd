@@ -1,12 +1,25 @@
 ---
 - name: "Disable SELinux"
   selinux:
-    state: disabled
+    state: enforcing
 
 - replace:
     path: /etc/selinux/config
-    regexp: '^SELINUX=enforcing'
-    replace: 'SELINUX=permissive'
+    regexp: '^SELINUX'
+    replace: 'SELINUX=enforcing'
+
+- systemd:
+    state: started
+    name: "{{ item }}"
+    enabled: no
+    masked: yes
+    force: yes
+  ignore_errors: yes
+  when: ansible_service_mgr == "systemd"
+  loop:
+    - NetworkManager
+    - chronyd.service
+    - tuned.service
 
 - systemd:
     state: stopped
@@ -16,38 +29,8 @@
     force: yes
   ignore_errors: yes
   when: ansible_service_mgr == "systemd"
-
-- package:
-    name: "{{ item }}"
-    state: latest
-    update_cache: yes
-  loop:
-#    - '*'
-    - bash-completion
-    - bash-completion-extras
-    - bind-utils
-    - bridge-utils
-    - ccze
-    - chrony
-    - cockpit
-    - curl
-    - device-mapper-persistent-data 
-    - epel-release
-    - git 
-    - htop
-    - kexec-tools 
-    - lsof
-    - lvm2
-    - net-tools 
-    - psacct
-    - pyOpenSSL  
-    - rsync
-    - tuned
-    - tuned-profiles-atomic
-    - vim
-    - wget
-    - yum-utils
-
+  
+  
 - shell: tuned-adm profile atomic-host
   notify:
     - Start tuned
@@ -101,7 +84,4 @@
     path: /etc/modules-load.d/k8s.conf
     line: 'br_netfilter'
     create: true
-    
-## git clone git clone https://github.com/openshift/openshift-ansible
-
 ...

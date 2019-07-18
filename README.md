@@ -8,10 +8,12 @@ Description
 
  *
 
-Requirements
+Requerimento
 ------------
 
- *
+ * Sistemas operacionais RedHat, CentOS, Fedora Release 7 ou Superior
+ * Docker
+ * Resolução dns para os nomes dos hosts.
 
 Installation
 ------------
@@ -41,6 +43,14 @@ Example Playbook
     - okd
 ...
 ```
+
+Examplo Cenário
+----------------
+
+1 host master
+2 hosts app-node
+
+
 
 ----------------
 [![Licence](https://img.shields.io/badge/License-GPL%20v3-red.svg)](https://www.gnu.org/licenses/gpl-3.0.pt-br.html)
