@@ -101,5 +101,7 @@
     path: /etc/modules-load.d/k8s.conf
     line: 'br_netfilter'
     create: true
+    
 ## git clone git clone https://github.com/openshift/openshift-ansible
+
 ...
