@@ -18,8 +18,12 @@ Requerimento
 Installation
 ------------
 
+Installation
+------------
+
 ```console
 vagrant@localhost:~$ ansible-galaxy install wluisaraujo.okd
+vagrant@localhost:~$ ansible-galaxy install -r wluisaraujo.okd/requirements.txt
 ```
 
 Role Variables
